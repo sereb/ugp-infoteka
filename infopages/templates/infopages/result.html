@@ -1,0 +1,41 @@
+{% extends 'infopages/infopages.html' %}
+{% block pagetitle %}результат теста{% endblock %}
+{% block text1 %}
+<div class="pricing-header p-1 pb-md-3 mx-auto">
+    <h2 class="display-7 fw-normal text-left">Результат теста</h2>
+</div>
+<div class="fs-5 text-muted">
+{%if data%}
+<ul class="list-group">
+    {%for el in data%}
+    <li class="list-group-item"><a href="kurs?id={{ el.course_id }}">{{ el.coursetitle }}</a><br/>
+        {% if el.maximum_count > 0 %}
+            <small>Набрано баллов: {{ el.right_count }} из {{ el.maximum_count }} Баллов за неверные ответы: {{ el.negative_count }}. Итого: {{ el.itogo }}%.</small>
+            {% if el.itogo > 70 %}
+            <span class="p-1 bg-success text-white rounded">&nbsp;&#10004;&nbsp;</span>
+            {% else %}
+            <span class="p-1 bg-danger text-white rounded">&nbsp;&#10008;&nbsp;</span>
+            {% endif %}
+        {% else %}
+            <small>Тест не проводился.</small>
+        {% endif %}
+    </li>
+    {% endfor %}
+</ul>
+{% if negative_steps %}
+    <hr/>
+    <h5 class="display-7 fw-normal text-left">Рекомендуем повторить следующие темы:</h5>
+<ul class="list-group">
+    {%for el in negative_steps%}
+    <li class="list-group-item"><a href="step?id={{ el.nstepid }}">{{ el.title }}</a></li>
+    {% endfor %}
+</ul>
+{% endif %}
+<hr/>
+<a href = "{% url 'stats' %}" class="btn btn-primary">Хорошо!</a>
+{%else%}
+<p>Пока ничего нет</p>
+{%endif%}
+</div>
+
+{% endblock %}

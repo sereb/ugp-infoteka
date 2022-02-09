@@ -1,0 +1,25 @@
+{% extends 'infopages/infopages.html' %}
+{% block pagetitle %}{{ stepdata.title }}{% endblock %}
+{% block text1 %}
+    <div class="pricing-header p-1 pb-md-3 mx-auto">
+        <h2 class="display-7 fw-normal text-left">{{ stepdata.title }}</h2>
+        <div class="fs-5 text-muted"></div>
+    </div>
+<div class="row">
+    {{ stepdata.text |safe }}
+
+    <nav class="d-inline-flex mt-2  bg-light rounded justify-content-md-center">
+        {% if prvqid != 0 %}
+            <a class="me-3 py-2 text-dark text-decoration-none nav-link" href="step?id={{ prvqid }}">&lArr; Назад</a>
+        {% else %}
+            <a class="me-3 py-2 text-decoration-none nav-link disabled" href="#">&lArr; Назад</a>
+        {% endif %}
+        <a class="me-3 py-2 text-dark text-decoration-none" href="kurs?id={{ stepdata.kurseid_id }}">Вернуться в содержание</a>
+        {% if nextqid != 0%}
+            <a class="me-3 py-2 text-dark text-decoration-none nav-link" href="step?id={{ nextqid }}">Вперед &rArr;</a>
+        {% else %}
+            <a class="me-3 py-2 text-decoration-none nav-link disabled" href="#">Вперед &rArr;</a>
+        {% endif %}
+    </nav>
+</div>
+{% endblock %}

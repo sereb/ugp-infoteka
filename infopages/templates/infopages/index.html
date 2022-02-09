@@ -1,0 +1,31 @@
+{% extends 'infopages/infopages.html' %}
+{% block pagetitle %}Главная страница{% endblock %}
+{% block text1 %}
+{% for el in katkurs %}
+    <div class="pricing-header p-1 pb-md-3 mx-auto">
+        <h2 class="display-7 fw-normal text-left">{{ el.title }}</h2>
+        <div class="fs-5 text-muted">
+            <p>{{ el.description }}</p>
+        </div>
+    </div>
+    <div class="row">
+        {% for elem in kurses %}
+            {% if elem.catid_id == el.id %}
+                <div class="col-md-4">
+                    <div class="card mb-4 rounded-3 shadow-sm">
+                        <div class="card-header py-3">
+                            <h5 class="my-0 fw-normal">{{ elem.title }}</h5>
+                        </div>
+                        <div class="card-body">
+                            <img class="img-fluid kimg mx-auto d-block" src="media/{{ elem.image }}" />
+                            <p class="mt-3 mb-4">{{ elem.shortdesc | safe}}</p>
+                            <a class="w-100 btn btn-lg  bordered" href="kurs?id={{ elem.id }}">Подробнее...</a>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+     {% endfor %}
+    </div>
+    <div class="line w-100"></div>
+{% endfor %}
+{% endblock %}

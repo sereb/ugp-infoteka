@@ -1,0 +1,35 @@
+{% extends 'infopages/infopages.html' %}
+{% block pagetitle %}Тест{% endblock %}
+{% block text1 %}
+    {% if data and qwc != 0 %}
+    <div class="pricing-header p-1 pb-md-3 mx-auto">
+        <h2 class="display-7 fw-normal text-left">Тестирование</h2>
+        <div class="fs-5 text-muted">
+            <p>На каждый вопрос возможно несколько вариантов ответа, время тестирования не ограничено.</p>
+        </div>
+    </div>
+    <div class="row">
+    <form id="testform" class="form-check" method="GET" action="{% url 'result' %}">
+        {% csrf_token %}
+    {% for elc in data %}{% for els in elc.step %}{% for elq in els.question %}
+                <hr/>
+                <h5 class="display-7 fw-normal text-left">{{ elq.text | safe }}</h5>
+                <p><small>({{ elc.coursetitle }} / {{ els.steptitle }})</small></p>
+                {% for ela in elq.answer %}
+                        <input class="form-check-input" name="answerid[{{ elc.course_id }}][{{ ela.answer_id }}]" type="checkbox" value="{{ ela.answer_id }}" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">{{ ela.text }}</label><br>
+    {% endfor %}{% endfor %}{% endfor %}{% endfor %}
+        <hr/>
+        <button type="submit" class="btn btn-primary">Закончить тест</button>
+    </form>
+    </div>
+    {% else %}
+        <div class="pricing-header p-1 pb-md-3 mx-auto">
+        <h2 class="display-7 fw-normal text-left">Тестирование</h2><br/>
+        <div class="fs-5 text-muted">
+            <p>Извините, для вас нет доступных тестирований.</p>
+            <p>Вернитесь на <a href="{% url 'home' %}">главную страницу</a> или в <a href="{% url 'stats' %}">личный кабинет</a>.</p>
+        </div>
+    </div>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'infopages/infopages.html' %}
+{% block pagetitle %}выход{% endblock %}
+{% block text1 %}
+    <div class="pricing-header p-1 pb-md-3 mx-auto">
+        <h2 class="display-7 fw-normal text-left">Спасибо за сотрудничество</h2>
+        <br/>
+        {{ error |safe }}
+        <div class="fs-5 text-muted">
+            <p>Вы успешно вышли из системы.</p>
+            <p>Перейдите на <a href="{% url 'home' %}">главную страницу</a>, или <a href="{% url 'login' %}">войдите</a> снова для продолжения работы.</p>
+        </div>
+    </div>
+{% endblock %}
+
+

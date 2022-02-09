@@ -1,0 +1,27 @@
+{% extends 'infopages/infopages.html' %}
+{% block pagetitle %}{{ kursdata.title }}{% endblock %}
+{% block text1 %}
+    <div class="pricing-header p-1 pb-md-3 mx-auto">
+        <h2 class="display-7 fw-normal text-left">{{ kursdata.title }}</h2>
+        <div class="fs-5 text-muted">
+            <br>
+            <img class="kimg d-block float-left" src="media/{{ kursdata.image }}" />
+            <p>{{ kursdata.description | safe}}</p>
+            <div class="clear"></div>
+        </div>
+    </div>
+<div class="row">
+    {% if steps == 1 or steps == 0%}
+        {% for el in stepsdata %}
+        {{ el.text |safe }}
+        {% endfor %}
+    {% else %}
+        <h4 class="display-7 fw-normal text-left">Содержание:</h4>
+        <ul class="list-group">
+        {% for el in stepsdata %}
+            <li class="list-group-item">{{ el.order_number }}. <a href="step?id={{ el.id }}">{{ el.title }}</a></li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+</div>
+{% endblock %}

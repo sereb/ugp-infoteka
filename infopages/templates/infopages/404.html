@@ -1,0 +1,11 @@
+{% extends 'infopages/infopages.html' %}
+{% block pagetitle %}Ошибка 404{% endblock %}
+{% block text1 %}
+    <div class="pricing-header p-1 pb-md-3 mx-auto">
+        <h2 class="display-7 fw-normal text-left">Ошибка 404</h2>
+        <div class="fs-5 text-muted">
+            <p>Запрашиваемый материал не найден.</p>
+            <p>Перейдите на <a href="{% url 'home' %}">главную страницу</a>.
+        </div>
+    </div>
+{% endblock %}
